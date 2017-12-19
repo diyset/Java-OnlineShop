@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +36,7 @@ public class ProductService {
         product = this.em.createNamedQuery("Product.findAll").getResultList();
         return product;
     }
-    
-    
+
     public Product findById(Integer productId) {
         em = emf.createEntityManager();
         return em.find(Product.class, productId);
@@ -50,6 +50,16 @@ public class ProductService {
         em.getTransaction().commit();
         em.close();
 
+    }
+
+    @Transactional
+    public List<Product> searchProductByName(String description) {
+        em = emf.createEntityManager();
+
+        Query query = em.createQuery("Select u from Product u Where UPPER(u.description) Like '%'||UPPER(:productname)||'%' ");
+        query.setParameter("productname", description);
+        List<Product> product = query.getResultList();
+        return product;
     }
 
     /**

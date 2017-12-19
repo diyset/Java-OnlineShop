@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/welcome")
 public class WelcomeController {
 
-   
     @Autowired
     ProductService ps;
 
@@ -33,11 +33,18 @@ public class WelcomeController {
         model.addAttribute("totalproducts", products.size());
         return "welcome";
     }
-    
+
+    @RequestMapping(value="/search")
+    public String saerchProduct(@RequestParam("keyword") String description, Model model) {
+        List<Product> products = ps.searchProductByName(description);
+        model.addAttribute("products", products);
+        return "welcome";
+    }
+
     @RequestMapping("/contact")
-    public String showContact(Model mode){
-        
-       return "contact";
+    public String showContact(Model mode) {
+
+        return "contact";
     }
 
 }

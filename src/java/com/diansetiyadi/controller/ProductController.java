@@ -32,6 +32,7 @@ public class ProductController {
         model.addAttribute("registerBean", registerProductBean);
         return "registerproduct";
     }
+  
 
     @RequestMapping(value = "/save")
     public String saveRegistrationProduct(@ModelAttribute("registerBean") RegisterProductFormBean registerBean, Model model) {
@@ -56,5 +57,6 @@ public class ProductController {
         return "productlist";
         
     }
+    
 
 }

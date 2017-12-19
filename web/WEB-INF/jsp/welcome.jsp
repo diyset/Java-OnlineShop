@@ -30,33 +30,47 @@
     <body>
         <jsp:include page="head.jsp"/>
         <div class="container">
-            <c:forEach  var="e" items="${products}">
+            <form action="${pageContext.request.contextPath}/welcome/search">
 
+                <ul class="nav navbar-nav navbar-right">
+                    <div class="col-sm-8"
+                         <div class="topnav">
 
-                <div class="container">    
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">${e.description}</div>
-                                <div class="panel-body">
-                                    <a href="${pageContext.request.contextPath}/detailproduct/${e.productId}">
-                                        <img height="200" width="100" src="<c:url value="/Asset/Image/${e.imagepath}"/>" class="img-rounded center-block" alt="Image">
-                                    </a>
-                                </div>
-                                        <div class="panel-footer text-center"><fmt:formatNumber type="currency" value="${e.purchaseCost}"/>
-                                            <a href="${pageContext.request.contextPath}/detailproduct/add/${e.productId}">
-                                                <span class="glyphicon glyphicon-shopping-cart">AddCart</span></a></div>
-                            </div>
+                            <label>Search Produk</label>  <input type="text" placeholder="Search.." name="keyword">
+                            <input type="submit" value="Search"/>
                         </div>
+                        </form>
+                    </div>
+                </ul>
+                <br/>
+
+                <c:forEach  var="e" items="${products}">
+
+
+                    <div class="container">    
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">${e.description}</div>
+                                    <div class="panel-body">
+                                        <a href="${pageContext.request.contextPath}/detailproduct/${e.productId}">
+                                            <img height="200" width="100" src="<c:url value="/Asset/Image/${e.imagepath}"/>" class="img-rounded center-block" alt="Image">
+                                        </a>
+                                    </div>
+                                    <div class="panel-footer text-center"><fmt:formatNumber type="currency" value="${e.purchaseCost}"/>
+                                        <a href="${pageContext.request.contextPath}/detailproduct/add/${e.productId}">
+                                            <span class="glyphicon glyphicon-shopping-cart">AddCart</span></a></div>
+                                </div>
+                            </div>
 
 
 
-                    </c:forEach> 
-                </div>
-                <br>
-                <br>
+                        </c:forEach> 
+                    </div>
+                    <br>
+                    <br>
 
-                <jsp:include page="footer.jsp"/>
+                    <jsp:include page="footer.jsp"/>
 
-                </body>
-                </html>
+                    </body>
+                    </html>
